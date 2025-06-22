@@ -18,18 +18,21 @@ def test_client() -> TestClient:
     return TestClient(app)
 
 
+@pytest.fixture(autouse=True, scope="session")
+def set_tmdb_api_key():
+    """Ensure TMDB_API_KEY is set for all tests."""
+    os.environ["TMDB_API_KEY"] = "test"
+
+
 @pytest.fixture(autouse=True)
 def setup_test_environment():
     """Set up test environment variables."""
     # Set test environment variables
-    os.environ["TMDB_API_KEY"] = "test_api_key_12345"
     os.environ["ALLOWED_ORIGINS"] = "http://localhost:3000,http://test.com"
 
     yield
 
     # Clean up (optional)
-    if "TMDB_API_KEY" in os.environ:
-        del os.environ["TMDB_API_KEY"]
     if "ALLOWED_ORIGINS" in os.environ:
         del os.environ["ALLOWED_ORIGINS"]
 
