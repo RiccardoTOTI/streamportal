@@ -190,7 +190,7 @@ Get detailed information for a specific movie or series, including streaming ava
 }
 ```
 
-**Series Response:**
+**Series Response Sample:**
 ```json
 {
     "details": {
