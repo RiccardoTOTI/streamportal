@@ -120,7 +120,10 @@ class TestSearchEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_movies", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.return_value = mock_results
 
             response = test_client.post("/search", json=search_data)
@@ -155,7 +158,10 @@ class TestSearchEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_series", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.return_value = mock_results
 
             response = test_client.post("/search", json=search_data)
@@ -203,7 +209,10 @@ class TestSearchEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_movies", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.return_value = []
 
             response = test_client.post("/search", json=search_data)
@@ -222,7 +231,10 @@ class TestSearchEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_movies", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.side_effect = Exception("API Error")
 
             response = test_client.post("/search", json=search_data)
@@ -260,7 +272,10 @@ class TestDetailsEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.get_movie_details", new_callable=AsyncMock
         ) as mock_details_func:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_details_func.return_value = mock_details
 
             response = test_client.post("/details", json=details_data)
@@ -299,7 +314,10 @@ class TestDetailsEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.get_series_details", new_callable=AsyncMock
         ) as mock_details_func:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_details_func.return_value = mock_details
 
             response = test_client.post("/details", json=details_data)
@@ -324,7 +342,10 @@ class TestDetailsEndpoint:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.get_movie_details", new_callable=AsyncMock
         ) as mock_details_func:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_details_func.side_effect = NotFoundError(
                 "Movie with ID 999999 not found", "Movie", 999999
             )
@@ -451,7 +472,10 @@ class TestInputSanitization:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_movies", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.return_value = []
 
             response = test_client.post("/search", json=search_data)
@@ -470,7 +494,10 @@ class TestInputSanitization:
         with patch("app.main.get_headers") as mock_headers, patch(
             "app.main.search_movies", new_callable=AsyncMock
         ) as mock_search:
-            mock_headers.return_value = {"accept": "application/json", "Authorization": "Bearer test"}
+            mock_headers.return_value = {
+                "accept": "application/json", 
+                "Authorization": "Bearer test"
+            }
             mock_search.return_value = []
 
             response = test_client.post("/search", json=search_data)
