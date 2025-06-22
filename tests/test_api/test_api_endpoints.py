@@ -117,12 +117,13 @@ class TestSearchEndpoint:
             }
         ]
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_movies", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_movies", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.return_value = mock_results
 
@@ -155,12 +156,13 @@ class TestSearchEndpoint:
             }
         ]
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_series", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_series", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.return_value = mock_results
 
@@ -206,12 +208,13 @@ class TestSearchEndpoint:
             "option_language": "en-US",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_movies", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_movies", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.return_value = []
 
@@ -228,12 +231,13 @@ class TestSearchEndpoint:
             "option_language": "en-US",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_movies", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_movies", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.side_effect = Exception("API Error")
 
@@ -269,12 +273,15 @@ class TestDetailsEndpoint:
             "backdrop_path": "https://image.tmdb.org/t/p/original/...",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.get_movie_details", new_callable=AsyncMock
-        ) as mock_details_func:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch(
+                "app.main.get_movie_details", new_callable=AsyncMock
+            ) as mock_details_func,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_details_func.return_value = mock_details
 
@@ -311,12 +318,15 @@ class TestDetailsEndpoint:
             "backdrop_path": "https://image.tmdb.org/t/p/original/...",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.get_series_details", new_callable=AsyncMock
-        ) as mock_details_func:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch(
+                "app.main.get_series_details", new_callable=AsyncMock
+            ) as mock_details_func,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_details_func.return_value = mock_details
 
@@ -339,12 +349,15 @@ class TestDetailsEndpoint:
             "option_language": "en-US",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.get_movie_details", new_callable=AsyncMock
-        ) as mock_details_func:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch(
+                "app.main.get_movie_details", new_callable=AsyncMock
+            ) as mock_details_func,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_details_func.side_effect = NotFoundError(
                 "Movie with ID 999999 not found", "Movie", 999999
@@ -469,12 +482,13 @@ class TestInputSanitization:
             "option_language": "en-US",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_movies", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_movies", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.return_value = []
 
@@ -491,12 +505,13 @@ class TestInputSanitization:
             "option_language": "en-US",
         }
 
-        with patch("app.main.get_headers") as mock_headers, patch(
-            "app.main.search_movies", new_callable=AsyncMock
-        ) as mock_search:
+        with (
+            patch("app.main.get_headers") as mock_headers,
+            patch("app.main.search_movies", new_callable=AsyncMock) as mock_search,
+        ):
             mock_headers.return_value = {
-                "accept": "application/json", 
-                "Authorization": "Bearer test"
+                "accept": "application/json",
+                "Authorization": "Bearer test",
             }
             mock_search.return_value = []
 
