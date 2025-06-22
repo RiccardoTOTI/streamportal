@@ -19,9 +19,7 @@ def check_url_exists(url):
 async def check_url_exists_async(session, url):
     """Check if a URL exists asynchronously and returns 200 status code."""
     try:
-        async with session.get(
-            url, timeout=aiohttp.ClientTimeout(total=3)
-        ) as response:
+        async with session.get(url, timeout=aiohttp.ClientTimeout(total=3)) as response:
             return response.status == 200
     except Exception:
         return False

@@ -11,6 +11,7 @@ from .logger import get_logger
 # Get logger instance
 logger = get_logger("security")
 
+
 class RateLimiter:
     """Simple in-memory rate limiter."""
 
@@ -56,8 +57,10 @@ class RateLimiter:
         self.requests[client_ip].append(current_time)
         return True
 
+
 # Global rate limiter instance
 rate_limiter = RateLimiter(requests_per_minute=60)
+
 
 async def rate_limit_middleware(request: Request, call_next):
     """Rate limiting middleware."""
@@ -87,6 +90,7 @@ async def rate_limit_middleware(request: Request, call_next):
     response = await call_next(request)
     return response
 
+
 def get_client_ip(request: Request) -> str:
     """Get client IP address, handling proxy headers."""
     # Check for forwarded headers (when behind proxy)
@@ -102,10 +106,12 @@ def get_client_ip(request: Request) -> str:
     # Fallback to direct client IP
     return request.client.host
 
+
 def validate_content_type(content_type: str) -> bool:
     """Validate content type for requests."""
     allowed_types = ["Movie", "Series"]
     return content_type in allowed_types
+
 
 def sanitize_input(text: str) -> str:
     """Perform basic input sanitization."""
@@ -119,6 +125,7 @@ def sanitize_input(text: str) -> str:
         sanitized = sanitized.replace(char, "")
 
     return sanitized.strip()
+
 
 def log_request(request: Request, response_time: float) -> None:
     """Log request details for monitoring."""
@@ -136,6 +143,7 @@ def log_request(request: Request, response_time: float) -> None:
         status_code=status_code,
         user_agent=user_agent,
     )
+
 
 def log_error(request: Request, error: Exception) -> None:
     """Log error details for debugging."""

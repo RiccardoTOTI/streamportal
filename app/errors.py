@@ -8,6 +8,7 @@ from .logger import get_logger
 
 logger = get_logger("errors")
 
+
 class StreamPortalError(Exception):
     """Base exception for StreamPortal API."""
 
@@ -32,6 +33,7 @@ class StreamPortalError(Exception):
         self.details = details or {}
         super().__init__(self.message)
 
+
 class ValidationError(StreamPortalError):
     """Validation error for invalid input data."""
 
@@ -55,6 +57,7 @@ class ValidationError(StreamPortalError):
             details={"field": field, **(details or {})},
         )
 
+
 class AuthenticationError(StreamPortalError):
     """Authentication error for API key issues."""
 
@@ -76,6 +79,7 @@ class AuthenticationError(StreamPortalError):
             details=details or {},
         )
 
+
 class RateLimitError(StreamPortalError):
     """Rate limiting error."""
 
@@ -95,6 +99,7 @@ class RateLimitError(StreamPortalError):
             details={"retry_after": retry_after},
         )
 
+
 class ExternalAPIError(StreamPortalError):
     """Error from external API calls."""
 
@@ -112,6 +117,7 @@ class ExternalAPIError(StreamPortalError):
             status_code=status_code,
             details={"api_name": api_name},
         )
+
 
 class NotFoundError(StreamPortalError):
     """Resource not found error."""
@@ -136,6 +142,7 @@ class NotFoundError(StreamPortalError):
             details={"resource_type": resource_type, "resource_id": resource_id},
         )
 
+
 class StreamingAvailabilityError(StreamPortalError):
     """Error related to streaming availability checks."""
 
@@ -154,6 +161,7 @@ class StreamingAvailabilityError(StreamPortalError):
             status_code=503,
             details={"content_id": content_id},
         )
+
 
 def handle_streamportal_error(error: StreamPortalError) -> dict[str, Any]:
     """Convert StreamPortal error to structured response."""
@@ -178,12 +186,14 @@ def handle_streamportal_error(error: StreamPortalError) -> dict[str, Any]:
 
     return error_response
 
+
 def create_http_exception(error: StreamPortalError) -> HTTPException:
     """Convert StreamPortal error to FastAPI HTTPException."""
     return HTTPException(
         status_code=error.status_code,
         detail=handle_streamportal_error(error),
     )
+
 
 def handle_generic_exception(
     exception: Exception, context: str = "Unknown"
@@ -213,6 +223,7 @@ def handle_generic_exception(
 
     return error_response
 
+
 def validate_api_key(api_key: str) -> None:
     """Validate API key format and presence."""
     if not api_key:
@@ -220,6 +231,7 @@ def validate_api_key(api_key: str) -> None:
 
     if len(api_key) < 10:  # Basic validation
         raise AuthenticationError("Invalid API key format")
+
 
 def validate_search_query(query: str) -> None:
     """Validate search query."""
@@ -236,12 +248,14 @@ def validate_search_query(query: str) -> None:
             "Search query too long (max 100 characters)", field="text_search"
         )
 
+
 def validate_content_id(content_id: int) -> None:
     """Validate content ID."""
     if not isinstance(content_id, int) or content_id <= 0:
         raise ValidationError(
             "Content ID must be a positive integer", field="content_id"
         )
+
 
 def validate_content_type(content_type: str) -> None:
     """Validate content type."""
@@ -251,6 +265,7 @@ def validate_content_type(content_type: str) -> None:
             f"Content type must be one of: {', '.join(allowed_types)}",
             field="type_of_content",
         )
+
 
 def log_api_request(
     method: str,
@@ -272,6 +287,7 @@ def log_api_request(
             "user_agent": user_agent,
         },
     )
+
 
 def log_api_error(
     method: str,

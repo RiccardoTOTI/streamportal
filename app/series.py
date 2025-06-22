@@ -60,17 +60,19 @@ async def search_series(text_search, option_language, headers):
 
                 for series in page_data["results"]:
                     poster = await display_series_poster(series)
-                    name, air_date, vote_avg, overview = (
-                        await display_series_info(series)
+                    name, air_date, vote_avg, overview = await display_series_info(
+                        series
                     )
-                    series_list.append({
-                        "id": series["id"],
-                        "name": name,
-                        "air_date": air_date,
-                        "vote_avg": vote_avg,
-                        "overview": overview,
-                        "poster": poster,
-                    })
+                    series_list.append(
+                        {
+                            "id": series["id"],
+                            "name": name,
+                            "air_date": air_date,
+                            "vote_avg": vote_avg,
+                            "overview": overview,
+                            "poster": poster,
+                        }
+                    )
 
     logger.info(
         f"Series search completed: {len(series_list)} series found",
@@ -126,10 +128,12 @@ async def get_series_details(series_id, option_language, headers):
 
         # Check streaming availability and get episode information
         try:
-            valid_seasons, valid_episodes, streaming_urls = (
-                await search_series_data_async(
-                    session, series_data, option_language, headers
-                )
+            (
+                valid_seasons,
+                valid_episodes,
+                streaming_urls,
+            ) = await search_series_data_async(
+                session, series_data, option_language, headers
             )
             logger.debug(
                 f"Streaming availability check for series {series_id}",
@@ -306,4 +310,3 @@ async def display_series_info(series):
     vote_avg = series.get("vote_average", 0)
     overview = series.get("overview", "No overview available.")
     return name, air_date, vote_avg, overview
-

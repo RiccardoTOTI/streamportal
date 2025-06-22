@@ -60,14 +60,16 @@ async def search_movies(text_search, option_language, headers):
 
                 for movie in page_data["results"]:
                     poster = await display_movie_poster(movie)
-                    movies_list.append({
-                        "id": movie["id"],
-                        "original_title": movie["original_title"],
-                        "overview": movie["overview"],
-                        "release_date": movie["release_date"],
-                        "vote_average": movie["vote_average"],
-                        "poster": poster,
-                    })
+                    movies_list.append(
+                        {
+                            "id": movie["id"],
+                            "original_title": movie["original_title"],
+                            "overview": movie["overview"],
+                            "release_date": movie["release_date"],
+                            "vote_average": movie["vote_average"],
+                            "poster": poster,
+                        }
+                    )
 
     logger.info(
         f"Movie search completed: {len(movies_list)} movies found",

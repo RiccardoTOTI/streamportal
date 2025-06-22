@@ -2,9 +2,10 @@
 
 import random
 
-from app.main import HELLO_WORLD, ITEMS
 from requests import Response
 from starlette import status
+
+from app.main import HELLO_WORLD, ITEMS
 
 
 def test_root(test_client):
