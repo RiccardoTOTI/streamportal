@@ -1,9 +1,10 @@
 """Test fixtures and configuration."""
 
 import os
+from unittest.mock import patch
+
 import pytest
 from fastapi.testclient import TestClient
-from unittest.mock import patch
 
 from app.main import app
 
@@ -23,9 +24,9 @@ def setup_test_environment():
     # Set test environment variables
     os.environ["TMDB_API_KEY"] = "test_api_key_12345"
     os.environ["ALLOWED_ORIGINS"] = "http://localhost:3000,http://test.com"
-    
+
     yield
-    
+
     # Clean up (optional)
     if "TMDB_API_KEY" in os.environ:
         del os.environ["TMDB_API_KEY"]
@@ -56,7 +57,7 @@ def sample_movie_data():
         "backdrop_path": "/s3TBrRGB1iav7gFOCNx3H31MoES.jpg",
         "budget": 160000000,
         "revenue": 836836967,
-        "status": "Released"
+        "status": "Released",
     }
 
 
@@ -75,7 +76,7 @@ def sample_series_data():
         "backdrop_path": "/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg",
         "number_of_seasons": 5,
         "number_of_episodes": 62,
-        "status": "Ended"
+        "status": "Ended",
     }
 
 
@@ -89,7 +90,7 @@ def mock_search_results():
             "overview": "Cobb, a skilled thief...",
             "release_date": "2010-07-16",
             "vote_average": 8.4,
-            "poster": "https://image.tmdb.org/t/p/w500/..."
+            "poster": "https://image.tmdb.org/t/p/w500/...",
         },
         {
             "id": 550,
@@ -97,8 +98,8 @@ def mock_search_results():
             "overview": "A ticking-time-bomb insomniac...",
             "release_date": "1999-10-15",
             "vote_average": 8.8,
-            "poster": "https://image.tmdb.org/t/p/w500/..."
-        }
+            "poster": "https://image.tmdb.org/t/p/w500/...",
+        },
     ]
 
 
@@ -112,7 +113,7 @@ def mock_series_search_results():
             "air_date": "2008-01-20",
             "vote_avg": 9.5,
             "overview": "When an unassuming chemistry teacher...",
-            "poster": "https://image.tmdb.org/t/p/w500/..."
+            "poster": "https://image.tmdb.org/t/p/w500/...",
         },
         {
             "id": 1399,
@@ -120,6 +121,6 @@ def mock_series_search_results():
             "air_date": "2011-04-17",
             "vote_avg": 9.3,
             "overview": "Seven noble families fight for control...",
-            "poster": "https://image.tmdb.org/t/p/w500/..."
-        }
+            "poster": "https://image.tmdb.org/t/p/w500/...",
+        },
     ]
